@@ -11,9 +11,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-import java.util.Collections;
-import java.util.Comparator;
-
 
 public class TopscoresView extends BorderPane {
     private HBox hbxTerug;
@@ -65,29 +62,30 @@ public class TopscoresView extends BorderPane {
         TopscoresModel nieuwModel = new TopscoresModel();
         gpTopscores.add(lblKleineWitRuimte, 0, 1);
 
-        Collections.sort(nieuwModel.getPogingVoorTopscoresLijst(), new Comparator<PogingVoorTopscores>() {
-            @Override
-            public int compare(PogingVoorTopscores o1, PogingVoorTopscores o2) {
-                if (o1.getLengteBewerking() < o2.getLengteBewerking()) {
+        nieuwModel.getPogingVoorTopscoresLijst().sort((o1, o2) -> {
+            if (o1.lengteBewerking() < o2.lengteBewerking()) {
+                return 1;
+            } else if (o1.lengteBewerking() == o2.lengteBewerking()) {
+                if (o1.aantalPoginen() > o2.aantalPoginen()) {
                     return 1;
-                } else if (o1.getLengteBewerking() == o2.getLengteBewerking()) {
-                    if (o1.getAantalPoginen() > o2.getAantalPoginen()) {
+                } else if (o1.aantalPoginen() == o2.aantalPoginen()) {
+                    if (o1.tijdGedaanOverPoging() > o2.tijdGedaanOverPoging()) {
                         return 1;
-                    } else if (o1.getAantalPoginen() == o2.getAantalPoginen()) {
-                        if (o1.getTijdGedaanOverPoging()>o2.getTijdGedaanOverPoging()) {
-                            return 1;
-                        }}}
-                return -1;
+                    } else if (o1.tijdGedaanOverPoging() == o2.tijdGedaanOverPoging()) {
+                        return 0;
+                    }
+                }
             }
+            return -1;
         });
 
         for (int i=0; i<9; i++) {
             PogingVoorTopscores pogingen = nieuwModel.getPogingVoorTopscoresLijst().get(i);
 
-            lblNaam = new Label(" "+pogingen.getVoornaam()+" "+pogingen.getAchternaam());
-            lblLengteBewerkingGehad = new Label(Integer.toString(pogingen.getLengteBewerking()));
-            lblAantalPogingenNodigGehad = new Label(Integer.toString(pogingen.getAantalPoginen()));
-            lblTijdGedaanOverBewerking = new Label(pogingen.getTijdGedaanOverPoging()+" sec");
+            lblNaam = new Label(" "+pogingen.voornaam()+" "+pogingen.achternaam());
+            lblLengteBewerkingGehad = new Label(Integer.toString(pogingen.lengteBewerking()));
+            lblAantalPogingenNodigGehad = new Label(Integer.toString(pogingen.aantalPoginen()));
+            lblTijdGedaanOverBewerking = new Label(pogingen.tijdGedaanOverPoging()+" sec");
 
             lblNaam.setPrefWidth(170);
             lblLengteBewerkingGehad.setPrefWidth(50);

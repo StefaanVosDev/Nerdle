@@ -1,8 +1,8 @@
 package Nerdle.model;
 
 public class Speler {
-    private String naam;
-    private String achternaam;
+    private final String naam;
+    private final String achternaam;
 
     public Speler(String naam, String achternaam) {
         this.naam = naam;

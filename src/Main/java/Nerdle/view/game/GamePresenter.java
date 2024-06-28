@@ -2,15 +2,15 @@ package Nerdle.view.game;
 
 
 import Nerdle.model.*;
-import Nerdle.view.winOrLoseScreen.WinOrLoseScreenView;
 import Nerdle.view.winOrLoseScreen.WinOrLoseScreenPresenter;
+import Nerdle.view.winOrLoseScreen.WinOrLoseScreenView;
 import javafx.animation.PauseTransition;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -25,8 +25,8 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class GamePresenter {
-    private ProgrammaModel model;
-    private GameView view;
+    private final ProgrammaModel model;
+    private final GameView view;
 
     public GamePresenter(ProgrammaModel model, GameView view) {
         this.model = model;
@@ -36,306 +36,236 @@ public class GamePresenter {
     }
 
     private void addEventHandlers() {
-        view.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode() == KeyCode.NUMPAD0 || keyEvent.getCode() == KeyCode.DIGIT0) {
-                    if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
-                        model.getGame().getHuidigePogingInOpbouw().add(new Getal(0));
-                        updateView();
-                    }
-                } else if (keyEvent.getCode() == KeyCode.NUMPAD1 || keyEvent.getCode() == KeyCode.DIGIT1) {
-
-                    if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
-                        model.getGame().getHuidigePogingInOpbouw().add(new Getal(1));
-                        updateView();
-                    }
-                } else if (keyEvent.getCode() == KeyCode.NUMPAD2 || keyEvent.getCode() == KeyCode.DIGIT2) {
-                    if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
-                        model.getGame().getHuidigePogingInOpbouw().add(new Getal(2));
-                        updateView();
-                    }
-                } else if (keyEvent.getCode() == KeyCode.NUMPAD3 || keyEvent.getCode() == KeyCode.DIGIT3) {
-                    if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
-                        model.getGame().getHuidigePogingInOpbouw().add(new Getal(3));
-                        updateView();
-                    }
-                } else if (keyEvent.getCode() == KeyCode.NUMPAD4 || keyEvent.getCode() == KeyCode.DIGIT4) {
-                    if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
-                        model.getGame().getHuidigePogingInOpbouw().add(new Getal(4));
-                        updateView();
-                    }
-                } else if (keyEvent.getCode() == KeyCode.NUMPAD5 || keyEvent.getCode() == KeyCode.DIGIT5) {
-                    if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
-                        model.getGame().getHuidigePogingInOpbouw().add(new Getal(5));
-                        updateView();
-                    }
-                } else if (keyEvent.getCode() == KeyCode.NUMPAD6 || keyEvent.getCode() == KeyCode.DIGIT6) {
-                    if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
-                        model.getGame().getHuidigePogingInOpbouw().add(new Getal(6));
-                        updateView();
-                    }
-                } else if (keyEvent.getCode() == KeyCode.NUMPAD7 || keyEvent.getCode() == KeyCode.DIGIT7) {
-                    if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
-                        model.getGame().getHuidigePogingInOpbouw().add(new Getal(7));
-                        updateView();
-                    }
-                } else if (keyEvent.getCode() == KeyCode.NUMPAD8 || keyEvent.getCode() == KeyCode.DIGIT8) {
-                    if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
-                        model.getGame().getHuidigePogingInOpbouw().add(new Getal(8));
-                        updateView();
-                    }
-                } else if (keyEvent.getCode() == KeyCode.NUMPAD9 || keyEvent.getCode() == KeyCode.DIGIT9) {
-                    if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
-                        model.getGame().getHuidigePogingInOpbouw().add(new Getal(9));
-                        updateView();
-                    }
-                } else if (keyEvent.getCode() == KeyCode.PLUS || keyEvent.getCode() == KeyCode.ADD) {
-                    if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
-                        model.getGame().getHuidigePogingInOpbouw().add(new Plus());
-                        updateView();
-                    }
-                } else if (keyEvent.getCode() == KeyCode.MINUS || keyEvent.getCode() == KeyCode.SUBTRACT) {
-                    if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
-                        model.getGame().getHuidigePogingInOpbouw().add(new Min());
-                        updateView();
-                    }
-                } else if (keyEvent.getCode() == KeyCode.MULTIPLY) {
-                    if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
-                        model.getGame().getHuidigePogingInOpbouw().add(new Maal());
-                        updateView();
-                    }
-                } else if (keyEvent.getCode() == KeyCode.DIVIDE) {
-                    if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
-                        model.getGame().getHuidigePogingInOpbouw().add(new Deel());
-                        updateView();
-                    }
-                } else if (keyEvent.getCode() == KeyCode.EQUALS) {
-                    if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
-                        model.getGame().getHuidigePogingInOpbouw().add(new IsTeken());
-                        updateView();
-                    }
-                } else if (keyEvent.getCode() == KeyCode.DELETE || keyEvent.getCode() == KeyCode.BACK_SPACE) {
-                    if (model.getGame().getHuidigePogingInOpbouw().size() != 0) {
-                        model.getGame().getHuidigePogingInOpbouw().remove(model.getGame().getHuidigePogingInOpbouw().size() - 1);
-                        updateView();
-                    }
-                }
-            }
-        });
-
-        view.getGetal0().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
+        view.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.NUMPAD0 || keyEvent.getCode() == KeyCode.DIGIT0) {
                 if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
                     model.getGame().getHuidigePogingInOpbouw().add(new Getal(0));
                     updateView();
                 }
-            }
-        });
-        view.getGetal1().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
+            } else if (keyEvent.getCode() == KeyCode.NUMPAD1 || keyEvent.getCode() == KeyCode.DIGIT1) {
+
                 if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
                     model.getGame().getHuidigePogingInOpbouw().add(new Getal(1));
                     updateView();
                 }
-            }
-        });
-        view.getGetal2().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
+            } else if (keyEvent.getCode() == KeyCode.NUMPAD2 || keyEvent.getCode() == KeyCode.DIGIT2) {
                 if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
                     model.getGame().getHuidigePogingInOpbouw().add(new Getal(2));
                     updateView();
                 }
-            }
-        });
-        view.getGetal3().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
+            } else if (keyEvent.getCode() == KeyCode.NUMPAD3 || keyEvent.getCode() == KeyCode.DIGIT3) {
                 if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
                     model.getGame().getHuidigePogingInOpbouw().add(new Getal(3));
                     updateView();
                 }
-            }
-        });
-        view.getGetal4().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
+            } else if (keyEvent.getCode() == KeyCode.NUMPAD4 || keyEvent.getCode() == KeyCode.DIGIT4) {
                 if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
                     model.getGame().getHuidigePogingInOpbouw().add(new Getal(4));
                     updateView();
                 }
-            }
-        });
-        view.getGetal5().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
+            } else if (keyEvent.getCode() == KeyCode.NUMPAD5 || keyEvent.getCode() == KeyCode.DIGIT5) {
                 if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
                     model.getGame().getHuidigePogingInOpbouw().add(new Getal(5));
                     updateView();
                 }
-            }
-        });
-        view.getGetal6().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
+            } else if (keyEvent.getCode() == KeyCode.NUMPAD6 || keyEvent.getCode() == KeyCode.DIGIT6) {
                 if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
                     model.getGame().getHuidigePogingInOpbouw().add(new Getal(6));
                     updateView();
                 }
-            }
-        });
-        view.getGetal7().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
+            } else if (keyEvent.getCode() == KeyCode.NUMPAD7 || keyEvent.getCode() == KeyCode.DIGIT7) {
                 if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
                     model.getGame().getHuidigePogingInOpbouw().add(new Getal(7));
                     updateView();
                 }
-            }
-        });
-        view.getGetal8().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
+            } else if (keyEvent.getCode() == KeyCode.NUMPAD8 || keyEvent.getCode() == KeyCode.DIGIT8) {
                 if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
                     model.getGame().getHuidigePogingInOpbouw().add(new Getal(8));
                     updateView();
                 }
-            }
-        });
-        view.getGetal9().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
+            } else if (keyEvent.getCode() == KeyCode.NUMPAD9 || keyEvent.getCode() == KeyCode.DIGIT9) {
                 if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
                     model.getGame().getHuidigePogingInOpbouw().add(new Getal(9));
                     updateView();
                 }
-            }
-        });
-
-        view.getMaal().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
-                    model.getGame().getHuidigePogingInOpbouw().add(new Maal());
-                    updateView();
-                }
-            }
-        });
-        view.getDeel().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
-                    model.getGame().getHuidigePogingInOpbouw().add(new Deel());
-                    updateView();
-                }
-            }
-        });
-        view.getMin().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
-                    model.getGame().getHuidigePogingInOpbouw().add(new Min());
-                    updateView();
-                }
-            }
-        });
-        view.getPlus().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
+            } else if (keyEvent.getCode() == KeyCode.PLUS || keyEvent.getCode() == KeyCode.ADD) {
                 if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
                     model.getGame().getHuidigePogingInOpbouw().add(new Plus());
                     updateView();
                 }
-            }
-        });
-        view.getIsTeken().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
+            } else if (keyEvent.getCode() == KeyCode.MINUS || keyEvent.getCode() == KeyCode.SUBTRACT) {
+                if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
+                    model.getGame().getHuidigePogingInOpbouw().add(new Min());
+                    updateView();
+                }
+            } else if (keyEvent.getCode() == KeyCode.MULTIPLY) {
+                if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
+                    model.getGame().getHuidigePogingInOpbouw().add(new Maal());
+                    updateView();
+                }
+            } else if (keyEvent.getCode() == KeyCode.DIVIDE) {
+                if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
+                    model.getGame().getHuidigePogingInOpbouw().add(new Deel());
+                    updateView();
+                }
+            } else if (keyEvent.getCode() == KeyCode.EQUALS) {
                 if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
                     model.getGame().getHuidigePogingInOpbouw().add(new IsTeken());
                     updateView();
                 }
-            }
-        });
-
-        view.getDelete().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                if (model.getGame().getHuidigePogingInOpbouw().size() != 0) {
+            } else if (keyEvent.getCode() == KeyCode.DELETE || keyEvent.getCode() == KeyCode.BACK_SPACE) {
+                if (!model.getGame().getHuidigePogingInOpbouw().isEmpty()) {
                     model.getGame().getHuidigePogingInOpbouw().remove(model.getGame().getHuidigePogingInOpbouw().size() - 1);
                     updateView();
                 }
             }
         });
 
-        view.getEnter().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                if (model.getGame().getHuidigePogingInOpbouw().size() == model.getGame().getLengteBewerking()) {
-                    if (model.getGame().getHuidigePogingInOpbouw().checkIfCorrecteOplossing(model.getGame().getHuidigePogingInOpbouw())) {
+        view.getGetal0().setOnAction(actionEvent -> {
+            if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
+                model.getGame().getHuidigePogingInOpbouw().add(new Getal(0));
+                updateView();
+            }
+        });
+        view.getGetal1().setOnAction(actionEvent -> {
+            if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
+                model.getGame().getHuidigePogingInOpbouw().add(new Getal(1));
+                updateView();
+            }
+        });
+        view.getGetal2().setOnAction(actionEvent -> {
+            if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
+                model.getGame().getHuidigePogingInOpbouw().add(new Getal(2));
+                updateView();
+            }
+        });
+        view.getGetal3().setOnAction(actionEvent -> {
+            if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
+                model.getGame().getHuidigePogingInOpbouw().add(new Getal(3));
+                updateView();
+            }
+        });
+        view.getGetal4().setOnAction(actionEvent -> {
+            if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
+                model.getGame().getHuidigePogingInOpbouw().add(new Getal(4));
+                updateView();
+            }
+        });
+        view.getGetal5().setOnAction(actionEvent -> {
+            if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
+                model.getGame().getHuidigePogingInOpbouw().add(new Getal(5));
+                updateView();
+            }
+        });
+        view.getGetal6().setOnAction(actionEvent -> {
+            if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
+                model.getGame().getHuidigePogingInOpbouw().add(new Getal(6));
+                updateView();
+            }
+        });
+        view.getGetal7().setOnAction(actionEvent -> {
+            if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
+                model.getGame().getHuidigePogingInOpbouw().add(new Getal(7));
+                updateView();
+            }
+        });
+        view.getGetal8().setOnAction(actionEvent -> {
+            if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
+                model.getGame().getHuidigePogingInOpbouw().add(new Getal(8));
+                updateView();
+            }
+        });
+        view.getGetal9().setOnAction(actionEvent -> {
+            if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
+                model.getGame().getHuidigePogingInOpbouw().add(new Getal(9));
+                updateView();
+            }
+        });
 
-//TODO: (voor demo kan dan even opgave gezien worden en makkelijker uitspelen spel) System.out.println("Opgave: " + model.getGame().getOpgave());
+        view.getMaal().setOnAction(actionEvent -> {
+            if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
+                model.getGame().getHuidigePogingInOpbouw().add(new Maal());
+                updateView();
+            }
+        });
+        view.getDeel().setOnAction(actionEvent -> {
+            if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
+                model.getGame().getHuidigePogingInOpbouw().add(new Deel());
+                updateView();
+            }
+        });
+        view.getMin().setOnAction(actionEvent -> {
+            if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
+                model.getGame().getHuidigePogingInOpbouw().add(new Min());
+                updateView();
+            }
+        });
+        view.getPlus().setOnAction(actionEvent -> {
+            if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
+                model.getGame().getHuidigePogingInOpbouw().add(new Plus());
+                updateView();
+            }
+        });
+        view.getIsTeken().setOnAction(actionEvent -> {
+            if (model.getGame().getHuidigePogingInOpbouw().size() < model.getGame().getLengteBewerking()) {
+                model.getGame().getHuidigePogingInOpbouw().add(new IsTeken());
+                updateView();
+            }
+        });
 
-                        if (model.getGame().getHuidigePogingInOpbouw().equals(model.getGame().getOpgave())) {
+        view.getDelete().setOnAction(actionEvent -> {
+            if (!model.getGame().getHuidigePogingInOpbouw().isEmpty()) {
+                model.getGame().getHuidigePogingInOpbouw().remove(model.getGame().getHuidigePogingInOpbouw().size() - 1);
+                updateView();
+            }
+        });
 
-                            model.schrijfPogingTopscoreInCsv(new PogingVoorTopscores(model.getGame().getSpeler().getNaam(), model.getGame().getSpeler().getAchternaam(), model.getGame().getLengteBewerking(), model.getGame().getMaxAantalPogingen(), (int) ChronoUnit.SECONDS.between(model.getGame().getStartTijdstip(), LocalDateTime.now())));
-                            view.getScene().getRoot().setDisable(true);
-                            toonAfbeeldingGewonnen(true);
+        view.getEnter().setOnAction(actionEvent -> {
+            var huidigePoging = model.getGame().getHuidigePogingInOpbouw();
+            if (huidigePoging.size() == model.getGame().getLengteBewerking()) {
+                if (huidigePoging.checkIfCorrecteOplossing()) {
 
-                            PauseTransition pauze = new PauseTransition(Duration.seconds(10));
+                    if (huidigePoging.equals(model.getGame().getOpgave())) {
 
-                            pauze.setOnFinished(new EventHandler<ActionEvent>() {
-                                @Override
-                                public void handle(ActionEvent actionEvent) {
-                                    view.getScene().getWindow().hide();
-                                }
-                            });
-                            pauze.playFromStart();
-                        }
-                        model.getGame().getLijstFormules().add((Formule) model.getGame().getHuidigePogingInOpbouw().clone());
-                        model.getGame().getHuidigePogingInOpbouw().clear();
+                        model.schrijfPogingTopscoreInCsv(new PogingVoorTopscores(model.getGame().getSpeler().getNaam(), model.getGame().getSpeler().getAchternaam(), model.getGame().getLengteBewerking(), model.getGame().getMaxAantalPogingen(), (int) ChronoUnit.SECONDS.between(model.getGame().getStartTijdstip(), LocalDateTime.now())));
+                        view.getScene().getRoot().setDisable(true);
+                        toonAfbeeldingGewonnen(true);
 
-                    } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setHeaderText("Foutboodschap");
-                        alert.setContentText("Deze formule is niet wiskundig correct!");
-                        alert.setTitle("Deze formule is niet wiskundig correct");
+                        PauseTransition pauze = new PauseTransition(Duration.seconds(10));
 
-                        PauseTransition pauze = new PauseTransition(Duration.seconds(3));
-
-                        pauze.setOnFinished(new EventHandler<ActionEvent>() {
-                            @Override
-                            public void handle(ActionEvent actionEvent) {
-                                alert.hide();
-                            }
-                        });
+                        pauze.setOnFinished(actionEvent1 -> view.getScene().getWindow().hide());
                         pauze.playFromStart();
-
-                        alert.showAndWait();
                     }
+                    model.getGame().getLijstFormules().add((Formule) huidigePoging.clone());
+                    huidigePoging.clear();
+
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setHeaderText("Foutboodschap");
-                    alert.setContentText("Deze formule is niet lang genoeg!");
-                    alert.setTitle("Deze formule is niet lang genoeg");
+                    alert.setContentText("Deze formule is niet wiskundig correct!");
+                    alert.setTitle("Deze formule is niet wiskundig correct");
 
                     PauseTransition pauze = new PauseTransition(Duration.seconds(3));
 
-                    pauze.setOnFinished(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent actionEvent) {
-                            alert.hide();
-                        }
-                    });
+                    pauze.setOnFinished(actionEvent12 -> alert.hide());
                     pauze.playFromStart();
 
                     alert.showAndWait();
                 }
-                updateView();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Foutboodschap");
+                alert.setContentText("Deze formule is niet lang genoeg!");
+                alert.setTitle("Deze formule is niet lang genoeg");
+
+                PauseTransition pauze = new PauseTransition(Duration.seconds(3));
+
+                pauze.setOnFinished(actionEvent13 -> alert.hide());
+                pauze.playFromStart();
+
+                alert.showAndWait();
             }
+            updateView();
         });
 
     }
@@ -377,12 +307,7 @@ public class GamePresenter {
 
             PauseTransition pauze = new PauseTransition(Duration.seconds(10));
 
-            pauze.setOnFinished(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    view.getScene().getWindow().hide();
-                }
-            });
+            pauze.setOnFinished(actionEvent -> view.getScene().getWindow().hide());
             pauze.playFromStart();
         }
 
@@ -540,10 +465,9 @@ public class GamePresenter {
 
     private void toonAfbeeldingGewonnen(boolean gewonnen) {
 
-        ProgrammaModel programmaModel = new ProgrammaModel();
         WinOrLoseScreenView winOrLoseView = new WinOrLoseScreenView(gewonnen);
 
-        WinOrLoseScreenPresenter winOrLoseScreenPresenter = new WinOrLoseScreenPresenter(programmaModel, winOrLoseView);
+        new WinOrLoseScreenPresenter(winOrLoseView);
 
         Stage winOrLoseStage = new Stage();
         winOrLoseStage.initOwner(view.getScene().getWindow());

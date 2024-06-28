@@ -12,10 +12,12 @@ public class ProgrammaModel {
     }
 
     public void schrijfPogingTopscoreInCsv(PogingVoorTopscores eenPoging) {
-        File file = new File("C:\\JavaProjecten\\JavaFx\\Week4\\NerdleModelView\\resources\\Highscores.csv");
+        File file = new File("C:\\Users\\stefa\\OneDrive\\Documents\\AToegepase Informatica 2\\Projects\\NerdleModelView\\src\\Main\\resources\\Highscores.csv");
+
+//        File file = new File("C:\\JavaProjecten\\JavaFx\\Week4\\NerdleModelView\\resources\\Highscores.csv");
         try {
             FileWriter outputfile = new FileWriter(file, true);
-            outputfile.write(String.format("\n%s;%s;%d;%d;%d", eenPoging.getVoornaam(), eenPoging.getAchternaam(), eenPoging.getLengteBewerking(), eenPoging.getAantalPoginen(), eenPoging.getTijdGedaanOverPoging()));
+            outputfile.write(String.format("\n%s;%s;%d;%d;%d", eenPoging.voornaam(), eenPoging.achternaam(), eenPoging.lengteBewerking(), eenPoging.aantalPoginen(), eenPoging.tijdGedaanOverPoging()));
             outputfile.close();
 
         } catch (IOException ignored) {

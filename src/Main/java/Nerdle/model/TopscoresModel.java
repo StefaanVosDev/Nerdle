@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TopscoresModel {
-    private ArrayList<PogingVoorTopscores> pogingVoorTopscoresLijst;
+    private final ArrayList<PogingVoorTopscores> pogingVoorTopscoresLijst;
 
     public TopscoresModel() {
         this.pogingVoorTopscoresLijst = zetCsvFileOmTotArraylist();
@@ -21,12 +21,11 @@ public class TopscoresModel {
 
     private void zetOmTotCsv(ArrayList<PogingVoorTopscores> pogingVoorTopscoresLijst) {
 
-//        File file = new File("C:\\JavaProjecten\\JavaFx\\Week4\\NerdleModelView\\resources\\Highscores.csv");
         File file = new File("C:\\Users\\stefa\\OneDrive\\Documents\\AToegepase Informatica 2\\Projects\\NerdleModelView\\src\\Main\\resources\\Highscores.csv");
         try {
             FileWriter outputfile = new FileWriter(file, true);
             for (PogingVoorTopscores eenPoging : pogingVoorTopscoresLijst) {
-                outputfile.write(String.format("\n%s;%s;%d;%d;%d", eenPoging.getVoornaam(), eenPoging.getAchternaam(), eenPoging.getLengteBewerking(), eenPoging.getAantalPoginen(), eenPoging.getTijdGedaanOverPoging()));
+                outputfile.write(String.format("\n%s;%s;%d;%d;%d", eenPoging.voornaam(), eenPoging.achternaam(), eenPoging.lengteBewerking(), eenPoging.aantalPoginen(), eenPoging.tijdGedaanOverPoging()));
             }
             outputfile.close();
 
@@ -38,7 +37,6 @@ public class TopscoresModel {
     private ArrayList<PogingVoorTopscores> zetCsvFileOmTotArraylist() {
 
         ArrayList<PogingVoorTopscores> lijstPogingen = new ArrayList<>();
-//        Path pathToFile = Paths.get("C:\\JavaProjecten\\JavaFx\\Week4\\NerdleModelView\\resources\\Highscores.csv");
         Path pathToFile = Paths.get("C:\\Users\\stefa\\OneDrive\\Documents\\AToegepase Informatica 2\\Projects\\NerdleModelView\\src\\Main\\resources\\Highscores.csv");
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.US_ASCII)) {
             String line = br.readLine();

@@ -11,7 +11,7 @@ public class Generator extends WiskundigeOnderdeel {
 
     public Formule maakOplossing(int lengteOplossing) {
         lengteOplossing=lengteOplossing-1;
-        while (!oplossing.checkIfCorrecteOplossing(oplossing)) {
+        while (!oplossing.checkIfCorrecteOplossing()) {
             oplossing = new Formule();
             int plaatsIsTeken = rndGetal.nextInt(lengteOplossing - 3) + 2;
             Maal maal = new Maal();
@@ -27,13 +27,13 @@ public class Generator extends WiskundigeOnderdeel {
                 if (i == plaatsIsTeken) {
                     oplossing.add(isteken);
                 } else if (rndGetal.nextInt(2) == 1 || oplossing.contains(isteken)) {
+                    Getal nieuwGetal;
                     if (oplossing.get(oplossing.size() - 1) instanceof Bewerking) {
-                        Getal nieuwGetal = new Getal(rndGetal.nextInt(9) + 1);
-                        oplossing.add(nieuwGetal);
+                        nieuwGetal = new Getal(rndGetal.nextInt(9) + 1);
                     } else {
-                        Getal nieuwGetal = new Getal(rndGetal.nextInt(10));
-                        oplossing.add(nieuwGetal);
+                        nieuwGetal = new Getal(rndGetal.nextInt(10));
                     }
+                    oplossing.add(nieuwGetal);
                 } else {
                     int keuzeTeken = rndGetal.nextInt(4);
 
@@ -53,7 +53,7 @@ public class Generator extends WiskundigeOnderdeel {
         return oplossing;
     }
 
-    public Formule getOplossing() {
+    /*public Formule getOplossing() {
         return oplossing;
-    }
+    }*/
 }

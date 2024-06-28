@@ -4,7 +4,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
 public class WinOrLoseScreenView extends BorderPane {
-    private ImageView imgWinOrLose;
+    private final ImageView imgWinOrLose;
 
     public WinOrLoseScreenView(boolean win) {
         if (win) {

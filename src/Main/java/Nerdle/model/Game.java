@@ -5,15 +5,15 @@ import java.util.ArrayList;
 
 public class Game {
 
-    private Speler speler;
-    private Formule opgave;
-    private LocalDateTime startTijdstip;
-    private int lengteBewerking;
-    private int maxAantalPogingen;
+    private final Speler speler;
+    private final Formule opgave;
+    private final LocalDateTime startTijdstip;
+    private final int lengteBewerking;
+    private final int maxAantalPogingen;
 
-    private Formule huidigePogingInOpbouw = new Formule();
+    private final Formule huidigePogingInOpbouw = new Formule();
 
-   private ArrayList<Formule> lijstFormules = new ArrayList<>();
+   private final ArrayList<Formule> lijstFormules = new ArrayList<>();
 
     public Game(String voornaam, String achternaam, int lengteBewerking, int maxAantalPogingen) {
         this.speler=new Speler(voornaam, achternaam);

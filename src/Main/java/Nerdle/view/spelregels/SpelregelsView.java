@@ -37,14 +37,15 @@ public class SpelregelsView extends BorderPane {
         hbxTerug = new HBox();
         vBoxRegels = new VBox();
 
-        lblSpelRegels = new Label("Gok de NERDLE in een zelf gekozen aantal poginen. Na elke poging, de kleur van de vakjes zal \n" +
-                "veranderen en je laten zien hoe dicht je was tot de oplossing \n" +
-                "  • Er zijn een zelf gekozen aantal \"letters\" \n" +
-                "  • Een \"letter\" is één van\"0123456789+-*/=\"\n" +
-                "  • En een woord moet een calculatie zijn die mathematisch correct is \n" +
-                "  • Dus het moet een \"=\" bevatten\n" +
-                "  • Ook, het nummer rechts van de \"=\" is een normaal nummer (geen andere bewerking)\n" +
-                "  • Standaard volgorde van bewerkingen wordt toegepast, dus reken * en / voor + en -");
+        lblSpelRegels = new Label("""
+                Gok de NERDLE in een zelf gekozen aantal poginen. Na elke poging, de kleur van de vakjes zal\s
+                veranderen en je laten zien hoe dicht je was tot de oplossing\s
+                  • Er zijn een zelf gekozen aantal "letters"\s
+                  • Een "letter" is één van"0123456789+-*/="
+                  • En een woord moet een calculatie zijn die mathematisch correct is\s
+                  • Dus het moet een "=" bevatten
+                  • Ook, het nummer rechts van de "=" is een normaal nummer (geen andere bewerking)
+                  • Standaard volgorde van bewerkingen wordt toegepast, dus reken * en / voor + en -""");
 //                + "  • Volgorde is ook belanrijk, Bijvoorbeeld als het antwoord 10+20=30, dan is 20+10=30 niet juist");
 
         imgGroen = new ImageView("/groene9.JPG");

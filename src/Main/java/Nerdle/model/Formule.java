@@ -37,7 +37,7 @@ public class Formule extends ArrayList<WiskundigeOnderdeel> {
     public VakjeStatus vakjeStatusOnderstaandeButtons(Formule genereerdeFormule, ArrayList<Formule> lijstFormules, WiskundigeOnderdeel wiskundigeOnderdeel) {
         VakjeStatus resultaat = VakjeStatus.GRAY;
 
-        for (Formule formules:lijstFormules) {
+        /*for (Formule formules:lijstFormules) {
             for (WiskundigeOnderdeel onderdeel:formules) {
                 if (onderdeel.toString().equals(wiskundigeOnderdeel.toString())) {
                     resultaat=VakjeStatus.ZWART;
@@ -62,6 +62,24 @@ public class Formule extends ArrayList<WiskundigeOnderdeel> {
                     break;
                 }
             }
+        }*/
+        String wiskundigeOnderdeelString = wiskundigeOnderdeel.toString();
+        String genereerdeFormuleString = genereerdeFormule.toString();
+
+        for (Formule formules : lijstFormules) {
+            for (WiskundigeOnderdeel onderdeel : formules) {
+                String onderdeelString = onderdeel.toString();
+                if (onderdeelString.equals(wiskundigeOnderdeelString)) {
+                    resultaat = VakjeStatus.ZWART;
+                    if (genereerdeFormuleString.contains(wiskundigeOnderdeelString)) {
+                        resultaat = VakjeStatus.PAARS;
+                        if (genereerdeFormuleString.indexOf(wiskundigeOnderdeelString) == formules.toString().indexOf(onderdeelString)) {
+                            resultaat = VakjeStatus.GROEN;
+                            break;
+                        }
+                    }
+                }
+            }
         }
         return resultaat;
     }
@@ -76,8 +94,8 @@ public class Formule extends ArrayList<WiskundigeOnderdeel> {
         return resultaat;
     }
 
-    public boolean checkIfCorrecteOplossing(Formule rekenSomInvoer) {
-        Formule rekenSom = new Formule(rekenSomInvoer);
+    public boolean checkIfCorrecteOplossing() {
+        Formule rekenSom = new Formule(this);
 
 
         boolean resultaat=true;
@@ -122,12 +140,14 @@ public class Formule extends ArrayList<WiskundigeOnderdeel> {
             boolean deelbewerkingGeeftDouble = false;
             for (int j = 1; j < 3; j++) {
                 for (int i = 0; i < rekenSom.size(); i++) {
-                    if (rekenSom.get(i) instanceof Bewerking) {
-                        Bewerking huidigeBewerking = (Bewerking) rekenSom.get(i);
+                    if (rekenSom.get(i) instanceof Bewerking huidigeBewerking) {
                         if (huidigeBewerking.getPriorety() == j) {
                             //zoek getal links en rechts van de bewerking en doe de bewerking erop
-                            int k = 0;
-                            for (k = rekenSom.indexOf(huidigeBewerking) - 1; k > 0 && !(rekenSom.get(k - 1) instanceof Bewerking); k--) {}
+
+                            int k = rekenSom.indexOf(huidigeBewerking) - 1;
+                            while (k > 0 && !(rekenSom.get(k - 1) instanceof Bewerking)) {
+                                k--;
+                            }
 
                             List<WiskundigeOnderdeel> subListGetallenErvoor;
                             subListGetallenErvoor = rekenSom.subList(k, rekenSom.indexOf(huidigeBewerking));
@@ -137,7 +157,10 @@ public class Formule extends ArrayList<WiskundigeOnderdeel> {
                             for (int x = rekenSom.indexOf(huidigeBewerking) - 1; k <= x; x--) {
                                 rekenSom.remove(k);
                             }
-                            for (k = rekenSom.indexOf(huidigeBewerking) + 1; !(rekenSom.get(k) instanceof IsTeken) && !(rekenSom.get(k) instanceof Bewerking); k++) {}
+                            k = rekenSom.indexOf(huidigeBewerking) + 1;
+                            while (!(rekenSom.get(k) instanceof IsTeken) && !(rekenSom.get(k) instanceof Bewerking)) {
+                                k++;
+                            }
                             List<WiskundigeOnderdeel> subListGetallenErna;
                             subListGetallenErna = rekenSom.subList(rekenSom.indexOf(huidigeBewerking), k);
                             int getalErna = getal.getGetalVanListWiskundeOnderdeel(subListGetallenErna);
@@ -155,8 +178,13 @@ public class Formule extends ArrayList<WiskundigeOnderdeel> {
                             } else if (huidigeBewerking instanceof Deel) {
 
                                 //Hier double teruggeven miss om te zien dat het niet is afgerond
-                                if ((double)getalErvoor/getalErna!=(getalErvoor/getalErna)) {
+
+                               /*todo: remove this
+                                   if ((double)getalErvoor/getalErna!=(getalErvoor/getalErna)) {
                                     deelbewerkingGeeftDouble=true;
+                                }*/
+                                if (getalErvoor % getalErna != 0) {
+                                    deelbewerkingGeeftDouble = true;
                                 }
 
                                 Deel deel = new Deel();
@@ -204,8 +232,7 @@ public class Formule extends ArrayList<WiskundigeOnderdeel> {
     @Override
     public boolean equals(Object o) {
         boolean resultaat = false;
-        if (o instanceof Formule) {
-            Formule nieuweFormule = (Formule) o;
+        if (o instanceof Formule nieuweFormule) {
             if (nieuweFormule.size()==this.size()) {
                 resultaat=true;
                 for (int i = 0; i < this.size(); i++) {

@@ -8,7 +8,7 @@ public enum VakjeStatus {
     PAARS(Color.MEDIUMPURPLE),
     ZWART(Color.BLACK);
 
-    private Color kleur;
+    private final Color kleur;
     VakjeStatus(Color kleur) {
         this.kleur=kleur;
     }
